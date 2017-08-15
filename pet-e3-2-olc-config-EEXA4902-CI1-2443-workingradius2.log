@@ -1,0 +1,1014 @@
+﻿Pet-Rocky-Rolt# paginate fal
+Pet-Rocky-Rolt# sho run
+version N/A
+schema-version 10.0.0
+cos cosq-profile DEFAULT
+ cosq-entry 1
+ !
+ cosq-entry 2
+ !
+ cosq-entry 3
+ !
+ cosq-entry 4
+ !
+ cosq-entry 5
+ !
+ cosq-entry 6
+ !
+ cosq-entry 7
+ !
+ cosq-entry 8
+ !
+!
+cos priority-map-profile 8-traffic-class
+ s-vlan-pcp 0 1
+ !
+ s-vlan-pcp 1 2
+ !
+ s-vlan-pcp 2 3
+ !
+ s-vlan-pcp 3 4
+ !
+ s-vlan-pcp 4 5
+ !
+ s-vlan-pcp 5 6
+ !
+ s-vlan-pcp 6 7
+ !
+ s-vlan-pcp 7 8
+ !
+!
+class-map ethernet STC_DATA
+ flow 1
+  rule 1 match vlan 35
+ !
+!
+class-map ethernet flow
+!
+class-map ethernet hishighnessabdullah
+!
+class-map ethernet raja
+!
+class-map ethernet test
+ flow 1
+ !
+!
+class-map ethernet tester
+ flow 1
+  rule 1 match untagged
+ !
+!
+class-map ethernet testing
+ flow 1
+ !
+!
+class-map ip 1
+ ingress-flow 1
+  rule 1 match dscp 1
+ !
+!
+class-map ip Complex_1_1
+ ingress-flow 1
+ !
+ ingress-flow 2
+ !
+ ingress-flow 3
+ !
+ egress-flow 4
+ !
+ egress-flow 5
+ !
+ egress-flow 6
+ !
+!
+class-map ip Simple-Voice
+ ingress-flow 1
+  rule 1 match destination-ip-network 0.0.0.0/0
+ !
+ egress-flow 1
+  rule 1 match source-ip-network 0.0.0.0/0
+ !
+!
+class-map ip Simple-Voice1
+ ingress-flow 1
+  rule 1 match destination-ip-network 0.0.0.0/0
+ !
+ egress-flow 1
+  rule 1 match source-ip-network 0.0.0.0/0
+ !
+!
+class-map ip cm01
+ ingress-flow 1
+  rule 1 match destination-ip-network 4.4.4.4/32
+ !
+ ingress-flow 2
+  rule 1 match destination-ip-network 8.8.8.8/32
+ !
+ ingress-flow 3
+  rule 1 match destination-ip-network 8.8.8.8/32
+ !
+ egress-flow 1
+  rule 1 match source-ip-network 4.4.4.4/32
+ !
+ egress-flow 2
+  rule 1 match source-ip-network 8.8.8.8/32
+ !
+ egress-flow 3
+  rule 1 match source-ip-network 0.0.0.0/32
+ !
+!
+class-map ip coxLabTrial
+ ingress-flow 1
+  rule 16 match destination-ip-network 0.0.0.0/0
+ !
+ egress-flow 1
+ !
+!
+class-map ip graham
+ ingress-flow 1
+  rule 1 match destination-port-range 1-2
+ !
+ ingress-flow 2
+  rule 1 match destination-port-range 3-4
+ !
+ egress-flow 1
+  rule 1 match destination-port-range 1-2
+ !
+ egress-flow 2
+  rule 1 match destination-port-range 3-4
+ !
+!
+class-map ip sree
+ ingress-flow 1
+  rule 1 match protocol 0
+ !
+!
+class-map ip testDataAri
+ ingress-flow 1
+  rule 1 match protocol 0
+ !
+ egress-flow 1
+  rule 1 match protocol 0
+ !
+!
+class-map ip testVoiceAri
+ ingress-flow 2
+  rule 1 match protocol 17 source-port-range 2427
+ !
+ egress-flow 2
+  rule 1 match protocol 17 source-port-range 2427
+ !
+!
+class-map ip tester1
+ ingress-flow 1
+  rule 1 match destination-ip-network 0.0.0.0/0
+ !
+ egress-flow 1
+ !
+!
+policy-map Complex_1_Bronze
+ class-map-ip Complex_1_1
+  traffic-class 1
+   egress-shaper maximum 9000
+  !
+  traffic-class 4
+   egress-shaper maximum 1000
+  !
+  traffic-class 5
+   egress-shaper maximum 2000
+  !
+  egress-flow 4
+   traffic-class 4
+  !
+  egress-flow 5
+   traffic-class 5
+  !
+  egress-flow 6
+   traffic-class 1
+  !
+  ingress-flow 1
+   ingress-meter cir 100
+   ingress-meter eir 2000
+  !
+  ingress-flow 2
+   ingress-meter cir 1000
+   ingress-meter eir 1000
+  !
+  ingress-flow 3
+   ingress-meter eir 2000
+  !
+ !
+!
+policy-map Complex_1_Gold
+ class-map-ip Complex_1_1
+  traffic-class 1
+   egress-shaper maximum 15000
+  !
+  traffic-class 4
+   egress-shaper maximum 4000
+  !
+  traffic-class 5
+   egress-shaper maximum 9000
+  !
+  egress-flow 4
+   traffic-class 4
+  !
+  egress-flow 5
+   traffic-class 5
+  !
+  egress-flow 6
+   traffic-class 1
+  !
+  ingress-flow 1
+   ingress-meter cir 100
+   ingress-meter eir 4000
+  !
+  ingress-flow 2
+   ingress-meter cir 4000
+   ingress-meter eir 4000
+  !
+  ingress-flow 3
+   ingress-meter eir 9000
+  !
+ !
+!
+policy-map Complex_1_Silver
+ class-map-ip Complex_1_1
+  traffic-class 1
+   egress-shaper maximum 12000
+  !
+  traffic-class 4
+   egress-shaper maximum 2000
+  !
+  traffic-class 5
+   egress-shaper maximum 4000
+  !
+  egress-flow 4
+   traffic-class 4
+  !
+  egress-flow 5
+   traffic-class 5
+  !
+  egress-flow 6
+   traffic-class 1
+  !
+  ingress-flow 1
+   ingress-meter cir 100
+   ingress-meter eir 3000
+  !
+  ingress-flow 2
+   ingress-meter cir 2000
+   ingress-meter eir 2000
+  !
+  ingress-flow 3
+   ingress-meter eir 4000
+  !
+ !
+!
+policy-map Complex_2_Bronze
+!
+policy-map STC_Data1
+ class-map-ethernet STC_DATA
+  flow 1
+   translate-cevlan-tag 1001
+  !
+ !
+!
+policy-map Simple-Voice
+ class-map-ip Simple-Voice
+  egress-flow 1
+  !
+  ingress-flow 1
+  !
+ !
+!
+policy-map Simple-Voice1
+ class-map-ip Simple-Voice1
+  egress-flow 1
+  !
+  ingress-flow 1
+  !
+ !
+!
+policy-map coxBronzeService
+ class-map-ip coxLabTrial
+  egress-flow 1
+   service-class MyServiceClassName
+  !
+  ingress-flow 1
+   service-class MyServiceClassName
+   ingress-meter eir 51200
+  !
+  egress shaper
+   maximum 51200
+  !
+ !
+!
+policy-map coxGoldService
+ class-map-ip coxLabTrial
+  egress-flow 1
+   service-class MyServiceClassName
+  !
+  ingress-flow 1
+   service-class MyServiceClassName
+   ingress-meter eir 1048576
+  !
+  egress shaper
+   maximum 1048576
+  !
+ !
+!
+policy-map coxSilverService
+ class-map-ip coxLabTrial
+  egress-flow 1
+   service-class MyServiceClassName
+  !
+  ingress-flow 1
+   service-class MyServiceClassName
+   ingress-meter eir 102400
+  !
+  egress shaper
+   maximum 102400
+  !
+ !
+!
+policy-map ddd
+ class-map-ip graham
+  traffic-class 1
+   egress-shaper maximum 123
+  !
+  egress-flow 1
+   traffic-class 1
+  !
+ !
+!
+policy-map graham
+ class-map-ip graham
+  traffic-class 1
+   egress-shaper maximum 123
+  !
+  egress-flow 1
+   traffic-class 1
+  !
+  egress-flow 2
+   traffic-class 1
+  !
+  ingress-flow 1
+   ingress-meter cir 64
+   ingress-meter eir 128
+  !
+  ingress-flow 2
+   ingress-meter cir 128
+   ingress-meter eir 128
+  !
+ !
+!
+policy-map gsh
+ class-map-ip coxLabTrial
+  ingress-flow 1
+   service-class gsh
+  !
+ !
+!
+policy-map pm01
+ class-map-ip cm01
+  traffic-class 1
+  !
+  traffic-class 2
+  !
+  egress-flow 1
+   traffic-class 1
+  !
+  egress-flow 2
+   traffic-class 2
+  !
+  egress-flow 3
+   traffic-class 1
+  !
+  ingress-flow 1
+  !
+  ingress-flow 2
+  !
+  ingress-flow 3
+  !
+ !
+!
+policy-map test
+ class-map-ethernet hishighnessabdullah
+ !
+!
+policy-map testDataAri
+ class-map-ip testDataAri
+ !
+!
+policy-map testVoiceAri
+ class-map-ip testVoiceAri
+ !
+!
+policy-map tester
+ class-map-ip testDataAri
+  egress-flow 1
+   set-dscp-value BE-CS0
+   service-class  test
+  !
+ !
+!
+policy-map untagged-voip
+!
+transport-service-profile SYSTEM_TSP
+ vlan-list 999
+!
+transport-service-profile TSP_L2_STC
+ vlan-list 304
+!
+lldp-profile x
+ system-capabilities-tlv transmit
+!
+multicast-profile NO_MVR
+!
+igmp-profile SYSTEM
+!
+ont-profile 711GE
+ interface ont-ethernet g1
+ !
+ interface ont-ethernet g2
+ !
+ interface ont-ua 1
+ !
+ interface ont-ua 2
+ !
+ interface pots p1
+ !
+ interface pots p2
+ !
+ interface rg G1
+ !
+ interface full-bridge F1
+ !
+!
+ont-profile 725GE
+ interface ont-ethernet g1
+ !
+ interface ont-ua 1
+ !
+ interface ont-ua 2
+ !
+ interface pots p1
+ !
+ interface pots p2
+ !
+ interface rf-video r1
+ !
+ interface rg G1
+ !
+ interface full-bridge F1
+ !
+!
+ont-profile 801G
+ interface ont-ethernet g1
+ !
+!
+ont-profile 801GP
+ interface ont-ethernet g1
+ !
+!
+ont-profile 803G
+ interface ont-ethernet g1
+ !
+ interface ont-ua 1
+ !
+ interface pots p1
+ !
+!
+ont-profile 811G
+ interface ont-ethernet g1
+ !
+ interface ont-ethernet g3
+ !
+ interface ont-ethernet g4
+ !
+!
+ont-profile 844G
+ model dddd
+ interface ont-ethernet g1
+ !
+ interface ont-ethernet g2
+ !
+ interface ont-ethernet g24
+ !
+ interface ont-ethernet g3
+ !
+ interface ont-ethernet g4
+ !
+ interface ont-ethernet g5
+ !
+ interface ont-ua 1
+ !
+ interface ont-ua 2
+ !
+ interface pots p1
+ !
+ interface pots p2
+ !
+ interface rg G1
+ !
+ interface full-bridge F1
+ !
+!
+ont-profile 844GE
+ interface ont-ethernet g1
+ !
+ interface ont-ethernet g2
+ !
+ interface ont-ethernet g3
+ !
+ interface ont-ethernet g4
+ !
+ interface ont-ua 1
+ !
+ interface ont-ua 2
+ !
+ interface pots p1
+ !
+ interface pots p2
+ !
+ interface rg G1
+ !
+ interface full-bridge F1
+ !
+!
+ont-profile 911
+ interface ont-ethernet g1
+ !
+!
+sip-profile metaswitch
+ proxy-server 10.0.20.10
+!
+mgcp-profile metaswitch
+!
+mgcp-profile mgcp-profile
+ pri-gw-controller 10.0.20.10
+ term-prefix       AALN
+!
+dial-plan system-default
+ rule 1 pattern ^911n
+ rule 2 pattern ^411
+ rule 3 pattern ^[2-9][0-9]{6}
+ rule 4 pattern ^1[2-9][0-9]{9}
+ rule 5 pattern ^011[0-9]*T
+ rule 6 pattern ^S[0-9]{2}
+!
+l2-dhcp-profile 1
+!
+l3-dhcp-profile 2
+ helper-address 1
+ helper-address 2
+ helper-address 3
+ helper-address 4
+ helper-address 5
+ helper-address 6
+ helper-address 7
+ helper-address 8
+!
+l2cp-profile EP_LAN_TREE
+ l2cp-entry 01:80:C2:00:00:00 01:80:C2:00:00:00 tunnel
+ l2cp-entry 01:80:C2:00:00:01 01:80:C2:00:00:0A discard
+ l2cp-entry 01:80:C2:00:00:0B 01:80:C2:00:00:0D tunnel
+ l2cp-entry 01:80:C2:00:00:0E 01:80:C2:00:00:0E discard
+ l2cp-entry 01:80:C2:00:00:0F 01:80:C2:00:00:0F tunnel
+ l2cp-entry 01:80:C2:00:00:20 01:80:C2:00:00:2F tunnel
+!
+l2cp-profile EP_LINE_OPTION_1
+ l2cp-entry 01:80:C2:00:00:00 01:80:C2:00:00:00 tunnel
+ l2cp-entry 01:80:C2:00:00:01 01:80:C2:00:00:0A discard
+ l2cp-entry 01:80:C2:00:00:0B 01:80:C2:00:00:0D tunnel
+ l2cp-entry 01:80:C2:00:00:0E 01:80:C2:00:00:0E discard
+ l2cp-entry 01:80:C2:00:00:0F 01:80:C2:00:00:0F tunnel
+ l2cp-entry 01:80:C2:00:00:20 01:80:C2:00:00:2F tunnel
+!
+l2cp-profile EP_LINE_OPTION_2
+ l2cp-entry 01:80:C2:00:00:00 01:80:C2:00:00:00 tunnel
+ l2cp-entry 01:80:C2:00:00:01 01:80:C2:00:00:01 discard
+ l2cp-entry 01:80:C2:00:00:02 01:80:C2:00:00:03 tunnel
+ l2cp-entry 01:80:C2:00:00:04 01:80:C2:00:00:06 discard
+ l2cp-entry 01:80:C2:00:00:07 01:80:C2:00:00:07 tunnel
+ l2cp-entry 01:80:C2:00:00:08 01:80:C2:00:00:0D discard
+ l2cp-entry 01:80:C2:00:00:0E 01:80:C2:00:00:0E tunnel
+ l2cp-entry 01:80:C2:00:00:0F 01:80:C2:00:00:0F discard
+ l2cp-entry 01:80:C2:00:00:20 01:80:C2:00:00:2F tunnel
+!
+l2cp-profile EVP_LINE_LAN_TREE
+ l2cp-entry 01:80:C2:00:00:00 01:80:C2:00:00:0F discard
+ l2cp-entry 01:80:C2:00:00:20 01:80:C2:00:00:2F tunnel
+!
+dscp-map UNI
+!
+access-list ethernet auto-generated-2
+ description SYN_flood
+ rule 1 match ethertype 0x26DD
+!
+access-list ethernet test
+ rule 1 action deny
+!
+access-list ipv4 auto-generated-1
+ description "CM-Config 001BD7CB7750.cfg ACLs\""
+ rule 1 match destination-ipv4-network 68.1.0.0/23 protocol 6 destination-port-range 25
+ rule 2 match destination-ipv4-network 68.6.0.0/15 protocol 6 destination-port-range 25
+ rule 3 match destination-ipv4-network 70.168.47.0/24 protocol 6 destination-port-range 25
+ rule 4 match destination-ipv4-network 68.99.120.0/22 protocol 6 destination-port-range 25
+ rule 5 match protocol 6 destination-port-range 25
+ rule 5 action deny
+ rule 6 match protocol 17
+ rule 6 action deny
+ rule 7 match protocol 6 destination-port-range 135-139
+ rule 7 action deny
+ rule 8 match protocol 6 destination-port-range 80
+ rule 9 match protocol 6 destination-port-range 445
+ rule 10 match protocol 17
+ rule 11 match protocol 6 destination-port-range 1433
+ rule 12 match protocol 6 destination-port-range 1434
+!
+access-list ipv4 test
+ rule 1 match destination-ipv4-network 224.0.0.0/24
+ rule 1 action deny
+!
+ip route 10.0.20.0/24 next-hop 10.26.207.138
+ip route 10.10.10.10/32 next-hop 10.205.28.1
+ip route 10.26.206.128/25 next-hop 10.26.207.138
+ip route 10.66.0.0/16 next-hop 10.26.207.138
+ip route 7.6.4.0/24 next-hop 7.6.6.4
+router ospf 1
+ area 0.0.0.10 nssa
+ router-id 10.26.207.135
+ logging all
+ graceful-restart enable
+!
+router isis 1
+ system-id 0143.0438.AeF0.00
+ area 01
+ !
+ is-type   level-2-only
+!
+router bgp 1001
+ neighbor 121.1.1.1
+  remote-as 1001
+  weight    1000
+ !
+ neighbor 131.1.1.1
+  remote-as 1001
+ !
+ redistribute connected all
+!
+hostname  Pet-Rocky-Rolt
+location  Petaluma
+contact   Joe
+ntp server 1 10.205.12.11
+ntp server 2 10.205.14.21
+cli session-timeout 0
+cli telnet      enable
+telnet interface 0
+netconf interface mgmt
+snmp
+ source-interface mgmt
+ v3 user graham
+  authentication protocol MD5 key 12341234
+  privacy protocol AES key 12341234
+ !
+ v2 admin-state enable
+ v2 community public ro
+ v2 trap-host 10.205.15.101 public
+ !
+!
+environment-alarm input al1
+!
+environment-alarm input al2
+!
+environment-alarm input al3
+!
+aaa authentication-order radius-then-local
+aaa user bernard password $1$ZonS3nZd$H5DPrwHghJvPeW9kCXCDM. role admin
+aaa user calix password $1$P9RTRnhZ$pUSNnirjbWhaax.RYBXVA0 role admin
+aaa user calix123456 password $1$Zn7xqg8o$6ICyd3O564a1mZQjAbdZV0 role oper
+aaa user monitor password $1$bo6RaxHE$prYA2waVd/o4atvb1H8l8/ role oper
+aaa user networkadmin password $1$henWME92$LqNxDU3.wWG19Fz.AlL5H0 role networkadmin
+aaa user support password $1$s4LUL/4m$aQjOzqPRi/CUHpaYTGLGz/ role oper
+aaa user sysadmin password $1$.fwnoBuy$fmIOhTEfd3RGyOSiwaQA40 role admin
+aaa user tac password $1$8BOtwCT.$HOJnpeLbAMHDXn8HV6X5O1 role admin
+aaa radius retry 10
+aaa radius source-interface mgmt
+aaa radius server 10.205.15.201 secret testing123
+upgrade server ftp://10.205.12.11
+ username rolt
+ password $4$04E6fLM68FRwhYYI0d4IDw==
+!
+ont-upgrade server 10.205.12.11
+ username upgrade
+ password $4$1J4xetJelVRwhYYI0d4IDw==
+ port     21
+!
+logging source-interface mgmt
+logging host 172.23.38.122
+!
+ont 1
+ profile-id    803G
+ reg-id        VnHB999999
+ serial-number 305158
+ subscriber-id 20170623T232517Z
+ description   "Calix::AXOS/SSH 4.0.18"
+ interface ont-ua 1
+  mgcp-profile mgcp-profile
+  vlan 209
+   policy-map Simple-Voice
+    class-map-ip Simple-Voice
+     egress-flow 1
+     !
+     ingress-flow 1
+     !
+    !
+   !
+  !
+ !
+!
+ont 2
+ profile-id    803G
+ reg-id        0TUV999999
+ serial-number 305097
+ subscriber-id 20170228T193016Z
+ description   "Calix::AXOS/SSH 4.0.11"
+ ont-mac-addr  ec:4f:82:7e:00:aa
+ interface ont-ua 1
+  shutdown
+ !
+!
+ont 3
+ profile-id    803G
+ reg-id        twPT8V5999
+ serial-number 35ECCF
+ subscriber-id 20170628T233257Z
+ description   "Calix::AXOS/SSH 4.0.18"
+ interface ont-ua 1
+ !
+!
+ont 4
+ profile-id    801G
+ reg-id        w3ct999000
+ serial-number 2AC479
+ subscriber-id 20170228T193018Z
+ description   "Calix::AXOS/SSH 4.0.11"
+!
+ont 5
+ profile-id    801G
+ reg-id        B0TS999000
+ serial-number 300C0A
+ subscriber-id 20170622T215807Z
+ description   "Calix::AXOS/SSH 4.0.18"
+!
+ont 65
+!
+ont _
+!
+ont a
+!
+ont abc
+!
+ont adhshfwkf
+!
+ont clei-code
+!
+ont joes-ont
+ interface ont-ua 1
+ !
+!
+ont khafEvg
+!
+ont ooolhlhioghiojhgrfgyiwegfukwegfhkgfk
+!
+ont ueuifguigwfkgfjkgf
+ profile-id 811G
+!
+ont upupou000-
+!
+ont uuoopp
+!
+ont uuuuuuuuu
+!
+ont wrhguowruoghiorhwgiorhgilhg8
+!
+ont yyyyy
+ profile-id 811G
+!
+meg foo
+ level 7
+ mep 1
+  direction down
+ !
+!
+auto-prov disable
+netconf-server call-home netconf-client test ssh endpoints endpoint test address 10.201.76.10 port 8300
+vlan 1
+!
+vlan 100
+ l3-service ENABLED
+!
+vlan 200
+ l3-service ENABLED
+!
+vlan 201
+ l3-service ENABLED
+!
+vlan 202
+!
+vlan 203
+!
+vlan 204
+!
+vlan 205
+!
+vlan 206
+!
+vlan 207
+!
+vlan 208
+!
+vlan 209
+ l3-service ENABLED
+!
+vlan 300
+ l3-service ENABLED
+!
+vlan 303
+!
+vlan 304
+!
+vlan 3000
+!
+interface craft 1
+ ip dhcp server disable
+ ip address 10.205.29.2 mask 255.255.252.0 gateway 10.205.28.1
+ no shutdown
+!
+interface pon 1/1/gp1
+ no shutdown
+!
+interface pon 1/1/gp2
+!
+interface pon 1/1/gp3
+!
+interface pon 1/1/gp4
+!
+interface pon 1/2/gp1
+ description pon2-1
+ no shutdown
+!
+interface pon 1/2/gp2
+!
+interface pon 1/2/gp3
+!
+interface pon 1/2/gp4
+ no shutdown
+!
+interface lag la1
+ lacp-mode                 active
+ max-port                  2
+ role                      inni
+ transport-service-profile TSP_L2_STC
+ no shutdown
+!
+interface loopback 0
+ ip address 192.168.21.1 netmask 255.255.255.255
+ ip ospf 1
+  area              0.0.0.10
+  passive-interface enable
+ !
+ ipv6
+ no shutdown
+!
+interface loopback mgmt
+ ip address 10.26.207.130 prefix-length 32
+ ipv6
+ no shutdown
+!
+interface vlan 100
+!
+interface vlan 200
+!
+interface vlan 209
+ ip address 10.26.209.2 netmask 255.255.255.224
+ no shutdown
+!
+interface ont-ethernet 1/g1
+ vlan 304
+  policy-map STC_Data1
+   class-map-ethernet STC_DATA
+    flow 1
+    !
+   !
+  !
+ !
+!
+interface ont-ethernet 2/g1
+!
+interface ont-ethernet 3/g1
+ mac-limit 7
+ vlan 100
+  policy-map Complex_1_Silver
+   class-map-ip Complex_1_1
+    egress-flow 4
+    !
+    egress-flow 5
+    !
+    egress-flow 6
+    !
+    ingress-flow 1
+    !
+    ingress-flow 2
+    !
+    ingress-flow 3
+    !
+   !
+  !
+ !
+!
+interface ont-ethernet 4/g1
+!
+interface ont-ethernet 5/g1
+!
+interface ont-ethernet ueuifguigwfkgfjkgf/g1
+!
+interface ont-ethernet ueuifguigwfkgfjkgf/g3
+!
+interface ont-ethernet ueuifguigwfkgfjkgf/g4
+!
+interface ont-ethernet yyyyy/g1
+!
+interface ont-ethernet yyyyy/g3
+!
+interface ont-ethernet yyyyy/g4
+!
+interface ethernet 1/3/x1
+ no shutdown
+ ip address 10.26.207.137 netmask 255.255.255.254
+ ip ospf 1
+  area           0.0.0.10
+  dead-interval  4
+  hello-interval 1
+ !
+ ipv6 address 2003::1 prefix-length 128
+ dscp-map UNI
+!
+interface ethernet 1/3/x2
+ no shutdown
+ ip address 10.26.207.139 netmask 255.255.255.254
+ ip ospf 1
+  area           0.0.0.10
+  dead-interval  4
+  hello-interval 1
+ !
+ dscp-map UNI
+!
+interface ethernet 1/3/x3
+ no shutdown
+ switchport ENABLED
+ role       lag
+ group      la1
+!
+interface ethernet 1/3/x4
+ no shutdown
+ switchport ENABLED
+ role       lag
+ group      la1
+ lldp admin-state enabled
+!
+interface wifi wlan1
+ no shutdown
+!
+interface ont-ua 1/1
+ mgcp-profile mgcp-profile
+ vlan 209
+  policy-map Simple-Voice
+   class-map-ip Simple-Voice
+    egress-flow 1
+    !
+    ingress-flow 1
+    !
+   !
+  !
+ !
+!
+interface ont-ua 2/1
+ shutdown
+!
+interface ont-ua 3/1
+!
+interface ont-ua joes-ont/1
+!
+interface pots 1/p1
+ mgcp-service 1
+ !
+!
+interface pots 2/p1
+ shutdown
+!
+interface pots 3/p1
+ shutdown
+!
